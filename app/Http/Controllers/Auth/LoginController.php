@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -46,12 +47,14 @@ class LoginController extends Controller
             //'password' => 'required|string',
             //'nif' => 'required|string'
         ]);
-        if(Auth::loginUsingId(1)){
+        $user = User::where('email', request("email"))->first();
+        if ($user  && Auth::loginUsingId($user->id)) {
             return redirect('/dashboard');
         }
-        return "error";
+        return back()->withErrors(['email' => trans('auth.failed')])->withInput(['email']);
     }
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect('/');
     }

@@ -4,6 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8" style="max-width: 30rem">
+        @if(session()->has('flash'))
+        <div class="alert alert-info">{{session('flash')}}
+        </div>
+        @endif
             <div class="card">
                 <div class="card-body">
                     <div class="login-box">
