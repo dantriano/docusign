@@ -2,6 +2,6 @@
 
 @section('content')
 <div id="app" class="content ">
-    <dashboard-component></dashboard-component>
+    <document-edit-component  :edit="'{!! $id !!}'"></document-edit-component>
 </div>
 @stop

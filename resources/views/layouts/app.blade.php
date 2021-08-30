@@ -26,7 +26,7 @@
                             <a class="nav-link {{ Route::currentRouteName()=='dashboard' ? 'active': '' }}" {{ Route::currentRouteName()=='dashboard' ? 'aria-current="page"': '' }} href="{{ route('dashboard') }}">{{__('messages.my_docs')}}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::currentRouteName()=='manager' ? 'active': '' }}" {{ Route::currentRouteName()=='manager' ? 'aria-current="page"': '' }} href="{{ route('manager') }}">{{__('messages.manager_docs')}}</a>
+                            <a class="nav-link {{ Route::currentRouteName()=='documentos' ? 'active': '' }}" {{ Route::currentRouteName()=='documentos' ? 'aria-current="page"': '' }} href="{{ route('documentos') }}">{{__('messages.manager_docs')}}</a>
                         </li>
                     </ul>
                     @endauth

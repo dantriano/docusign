@@ -15,8 +15,8 @@ class Documents extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->integer('type');
-            $table->integer('category');
+            $table->integer('type')->default('0');
+            $table->integer('category')->default('0');
             $table->string('name');
             $table->string('desc')->default('');
             $table->string('file')->nullable();

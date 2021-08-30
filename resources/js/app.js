@@ -3,11 +3,21 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
- require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue').default;
+window.Vue = require("vue").default;
+const VueRouter = require("vue-router").default;
 
-
+const Foo = { template: "<div>foo</div>" };
+const Bar = { template: "<div>bar</div>" };
+const routes = [
+    { path: "/admin", component: Foo },
+    { path: "/foo", component: Foo },
+    { path: "/bar", component: Bar }
+];
+const router = new VueRouter({
+    routes // short for `routes: routes`
+});
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -19,7 +29,22 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('dashboard-component', require('./components/DashboardComponent.vue').default);
+Vue.component(
+    "dashboard-component",
+    require("./components/DashboardComponent.vue").default
+);
+Vue.component(
+    "document-manager-component",
+    require("./components/DocumentManagerComponent.vue").default
+);
+Vue.component(
+    "document-edit-component",
+    require("./components/DocumentEditComponent.vue").default
+);
+Vue.component(
+    "document-list-component",
+    require("./components/DocumentListComponent.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,5 +53,6 @@ Vue.component('dashboard-component', require('./components/DashboardComponent.vu
  */
 
 const app = new Vue({
-    el: '#app',
+    router,
+    el: "#app"
 });
