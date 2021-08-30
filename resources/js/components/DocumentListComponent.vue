@@ -10,24 +10,28 @@
     </thead>
     <tbody>
       <tr v-for="(doc, key) in arrayDocs" :key="doc.id">
-        <th scope="row" v-text="key+1"></th>
+        <th scope="row" v-text="key + 1"></th>
         <td v-text="doc.name"></td>
         <td v-text="doc.desc"></td>
         <td>
-          <button type="button" class="btn btn-success btn-sm me-1 text-white">
-            Firmar</button
+          <button
+            type="button"
+            class="btn btn-success btn-sm me-1 text-white"
+            @click="manager(doc)"
+          >
+            Gestionar</button
           ><button
             type="button"
             class="btn btn-primary btn-sm me-1 text-white"
             @click="view(doc)"
           >
-            Veure</button
+            Editar</button
           ><button
             type="button"
             class="btn btn-danger btn-sm text-white"
             @click="deleteOne(doc)"
           >
-            Esborrar
+            Borrar
           </button>
         </td>
       </tr>
@@ -64,6 +68,10 @@ export default {
     },
     view(data) {
       window.location.href = "/documentos/edit/" + data.id;
+    },
+    manager(data) {
+      console.log(1)
+      window.location.href = "/documentos/manager/" + data.id;
     },
     deleteOne(data) {
       //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido

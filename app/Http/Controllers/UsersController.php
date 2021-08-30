@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
-
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class DocumentsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -41,23 +40,23 @@ class DocumentsController extends Controller
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $response = Document::all();
+        $response = User::all();
         return response()->json(['res' => $response]);
     }
-    public function get(Request $request)
+    public function byDocument(Request $request)
     {
         if ($request->expectsJson()) {
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $response = Document::find($request->id);
+        $response = User::where('document_id', '=', $request->id)->get();
         return response()->json(['res' => $response]);
     }
 
 
     public function save(Request $request)
     {
-        $doc = new Document();
+        $doc = new User();
         $doc->name = $request->name;
         $doc->desc = $request->desc;
         $doc->save();
@@ -65,7 +64,7 @@ class DocumentsController extends Controller
     }
     public function update(Request $request)
     {
-        $doc = Document::findOrFail($request->id);
+        $doc = User::findOrFail($request->id);
 
         $doc->name = $request->name;
         $doc->desc = $request->desc;
@@ -76,12 +75,12 @@ class DocumentsController extends Controller
     }
     public function show(Request $request)
     {
-        $doc = Document::findOrFail($request->id);
+        $doc = User::findOrFail($request->id);
         return $doc;
     }
     public function delete(Request $request)
     {
-        $task = Document::destroy($request->id);
+        $task = User::destroy($request->id);
         return $task;
         //Esta función obtendra el id de la tarea que hayamos seleccionado y la borrará de nuestra BD
     }

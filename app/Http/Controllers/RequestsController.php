@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Document;
-
+use App\Models\Request as Peticiones;
 use Illuminate\Http\Request;
 
-class DocumentsController extends Controller
+class RequestsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -41,31 +40,31 @@ class DocumentsController extends Controller
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $response = Document::all();
+        $response = Peticiones::all();
         return response()->json(['res' => $response]);
     }
-    public function get(Request $request)
+    public function byDocument(Request $request)
     {
         if ($request->expectsJson()) {
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $response = Document::find($request->id);
+        $response = Peticiones::leftJoin('users', 'users.id', '=', 'requests.user_id')->where('document_id', '=', $request->id)->get();
         return response()->json(['res' => $response]);
     }
 
 
     public function save(Request $request)
     {
-        $doc = new Document();
-        $doc->name = $request->name;
-        $doc->desc = $request->desc;
+        $doc = new Peticiones();
+        $doc->user_id = $request->user_id;
+        $doc->document_id = $request->document_id;
         $doc->save();
         return response()->json(['res' => $doc]);
     }
     public function update(Request $request)
     {
-        $doc = Document::findOrFail($request->id);
+        $doc = Peticiones::findOrFail($request->id);
 
         $doc->name = $request->name;
         $doc->desc = $request->desc;
@@ -76,12 +75,12 @@ class DocumentsController extends Controller
     }
     public function show(Request $request)
     {
-        $doc = Document::findOrFail($request->id);
+        $doc = Peticiones::findOrFail($request->id);
         return $doc;
     }
     public function delete(Request $request)
     {
-        $task = Document::destroy($request->id);
+        $task = Peticiones::destroy($request->id);
         return $task;
         //Esta función obtendra el id de la tarea que hayamos seleccionado y la borrará de nuestra BD
     }

@@ -20,6 +20,7 @@ Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'inde
 /* WEB */
 Route::get('/documentos', ['as' => 'documentos', 'uses' => 'App\Http\Controllers\DocumentsController@index']);
 Route::get('/documentos/edit/{id?}', ['as' => 'documentos.edit', 'uses' => 'App\Http\Controllers\DocumentsController@edit']);
+Route::get('/documentos/manager/{id}', ['as' => 'documentos.manager', 'uses' => 'App\Http\Controllers\DocumentsController@manager']);
 
 /* API */
 Route::get('/documentos/get/{id?}', ['as' => 'documentos.get', 'uses' => 'App\Http\Controllers\DocumentsController@get']);
@@ -29,6 +30,11 @@ Route::delete('/documentos/{id?}', ['as' => 'documentos.delete', 'uses' => 'App\
 Route::get('/documentos/list/{user_id?}', ['as' => 'documentos.list', 'uses' => 'App\Http\Controllers\DocumentsController@list']);
 //Route::get('/documentos/new', [App\Http\Controllers\DocumentsController::class, 'view']);
 //Route::post('/documentos/save', [App\Http\Controllers\DocumentsController::class, 'save']);
+Route::get('/requests/document/{id}', ['as' => 'requests.byDocument', 'uses' => 'App\Http\Controllers\RequestsController@byDocument']);
+Route::post('/requests', ['as' => 'requests.save', 'uses' => 'App\Http\Controllers\RequestsController@save']);
+Route::delete('/requests/{id?}', ['as' => 'requests.delete', 'uses' => 'App\Http\Controllers\RequestsController@delete']);
+Route::get('/users', ['as' => 'users.get', 'uses' => 'App\Http\Controllers\UsersController@list']);
+
 
 
 Auth::routes();

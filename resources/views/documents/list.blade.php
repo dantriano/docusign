@@ -6,7 +6,7 @@
 </nav>
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-12" style="">
+        <div class="col-md-12">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#pendents" type="button" role="tab" aria-controls="home" aria-selected="true">
