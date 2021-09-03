@@ -25,7 +25,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-xs-12" style="text-align: center">
-                                        <label id="j_idt22" class="ui-outputlabel ui-widget" style="padding-bottom: 20px">Acceder con</label><img src="/img/logo-clave.png" width="130" class="margin" />
+                                        <label id="j_idt22" class="ui-outputlabel ui-widget" style="padding-bottom: 20px">Acceder con</label><img src="{{url('img/logo-clave.png')}}" width="130" class="margin" />
                                         <input type="submit" value="CL@VE" class="btn btn-block" style=" width: 60%; display: inline;color: white;background-color: #3c8dbc;" />
                                     </div>
                                 </form>

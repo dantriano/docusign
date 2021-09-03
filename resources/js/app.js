@@ -30,8 +30,8 @@ const router = new VueRouter({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component(
-    "dashboard-component",
-    require("./components/DashboardComponent.vue").default
+    "requests-list-component",
+    require("./components/RequestsListComponent.vue").default
 );
 Vue.component(
     "document-manager-component",

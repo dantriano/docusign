@@ -22,7 +22,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="pendents" role="tabpanel" aria-labelledby="pendents-tab">
                     <div id="app" class="content ">
-                        <document-list-component></document-list-component>
+                        <document-list-component  :user="'{!! Auth::id() !!}'"></document-list-component>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">

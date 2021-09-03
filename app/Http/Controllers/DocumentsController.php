@@ -44,6 +44,15 @@ class DocumentsController extends Controller
         $response = Document::all();
         return response()->json(['res' => $response]);
     }
+    public function byUser(Request $request)
+    {
+        if ($request->expectsJson()) {
+            // return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        $response = Document::where('user_id', '=', $request->id)->get();
+        return response()->json(['res' => $response]);
+    }
     public function get(Request $request)
     {
         if ($request->expectsJson()) {

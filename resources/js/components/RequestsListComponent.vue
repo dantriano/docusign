@@ -49,22 +49,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td><button type="button" class="btn btn-success btn-sm me-1 text-white">Firmar</button><button type="button" class="btn btn-primary btn-sm me-1 text-white">Veure</button><button type="button" class="btn btn-danger btn-sm text-white">Esborrar</button></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td colspan="2">Larry the Bird</td>
-                  <td>@twitter</td>
+                <tr v-for="(req, key) in arrayDocs" :key="req.id">
+                  <th scope="row" v-text="key + 1"></th>
+                  <td v-text="req.name"></td>
+                  <td v-text="req.desc"></td>
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-success btn-sm me-1 text-white"
+                      @click="sign(req)"
+                    >
+                      Firmar
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -85,8 +82,36 @@
 
 <script>
 export default {
+  props: ["user"],
+  data() {
+    return {
+      user_id: this.user ? this.user : 0,
+      arrayDocs: [], //Este array contendrá las tareas de nuestra bd
+    };
+  },
   mounted() {
     console.log("Component mounted.");
+    this.getAll();
+  },
+  methods: {
+    sign(data) {
+      window.location.href = "/peticiones/firma/view/" + data.request_id;
+    },
+    getAll() {
+      let me = this;
+      let url = "/requests/user/" + me.user_id; //Ruta que hemos creado para que nos devuelva todas las tareas
+      axios
+        .get(url)
+        .then(function (response) {
+          console.log(response);
+          //creamos un array y guardamos el contenido que nos devuelve el response
+          me.arrayDocs = response.data.res;
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
+    },
   },
 };
 </script>

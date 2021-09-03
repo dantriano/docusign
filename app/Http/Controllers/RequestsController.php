@@ -18,7 +18,7 @@ class RequestsController extends Controller
     }
     public function index()
     {
-        return view('documents.list');
+        return view('requests.list');
     }
     public function manager(Request $request)
     {
@@ -32,6 +32,11 @@ class RequestsController extends Controller
         return view('documents.edit', compact('id'));
     }
 
+    public function viewSign(Request $request)
+    {
+        $req = $this->show($request);
+        return view('sign.view', compact('req'));
+    }
 
     //API CALLS
     public function list(Request $request)
@@ -53,7 +58,14 @@ class RequestsController extends Controller
         return response()->json(['res' => $response]);
     }
 
-
+    public function byUser(Request $request)
+    {
+        if ($request->expectsJson()) {
+            // return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+        $response = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('requests.id as request_id', 'documents.*')->where('requests.user_id', '=', $request->id)->get();
+        return response()->json(['res' => $response]);
+    }
     public function save(Request $request)
     {
         $doc = new Peticiones();
@@ -75,7 +87,7 @@ class RequestsController extends Controller
     }
     public function show(Request $request)
     {
-        $doc = Peticiones::findOrFail($request->id);
+        $doc = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('requests.id as request_id', 'documents.*')->findOrFail($request->id);
         return $doc;
     }
     public function delete(Request $request)

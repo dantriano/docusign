@@ -41,8 +41,10 @@
 
 <script>
 export default {
+  props: ["user"],
   data() {
     return {
+      user_id: this.user ? this.user : 0,
       arrayDocs: [], //Este array contendrá las tareas de nuestra bd
     };
   },

@@ -23,7 +23,7 @@
                     @auth
                     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::currentRouteName()=='dashboard' ? 'active': '' }}" {{ Route::currentRouteName()=='dashboard' ? 'aria-current="page"': '' }} href="{{ route('dashboard') }}">{{__('messages.my_requests')}}</a>
+                            <a class="nav-link {{ Route::currentRouteName()=='requests' ? 'active': '' }}" {{ Route::currentRouteName()=='requests' ? 'aria-current="page"': '' }} href="{{ route('requests') }}">{{__('messages.my_requests')}}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::currentRouteName()=='documentos' ? 'active': '' }}" {{ Route::currentRouteName()=='documentos' ? 'aria-current="page"': '' }} href="{{ route('documentos') }}">{{__('messages.manager_docs')}}</a>

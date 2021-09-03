@@ -19,7 +19,27 @@ apt-get update && apt-get install -y \
     npm \
     iputils-ping \
     dnsutils \
-    git
+    git \
+    poppler-utils
+
+#PDFtk  https://github.com/mikehaertl/php-pdftk
+#https://qastack.mx/ubuntu/1028522/how-can-i-install-pdftk-in-ubuntu-18-04-and-later
+#https://www.sitepoint.com/filling-pdf-forms-pdftk-php/
+#cd /tmp
+#wget http://mirrors.kernel.org/ubuntu/pool/universe/p/pdftk-java/pdftk-java_3.0.9-1_all.deb
+#apt install -y -q ./pdftk-java_3.0.9-1_all.deb
+#pdftk --version
+
+#sudo apt install git default-jdk-headless ant \
+#    libcommons-lang3-java libbcprov-java
+#cd /usr/local/bin
+#git clone https://gitlab.com/pdftk-java/pdftk.git
+#cd pdftk
+#mkdir lib
+#ln -st lib /usr/share/java/{commons-lang3,bcprov}.jar
+#ant jar
+#echo "alias pdftk='java -jar /usr/local/bin/pdftk/build/jar/pdftk.jar'" >> ~/.bashrc
+#source ~/.bashrc
 
 # Clear cache
 apt-get clean && rm -rf /var/lib/apt/lists/*
