@@ -16,8 +16,17 @@
                     </li>
                     <li class="list-group-item"><span class="action-list-badge">3</span>Preview and Sign
                         <div class="row justify-content-center">
-                            <button id="pdf-sign" type="button" class="btn btn-primary  text-white">Sign</button>
-                            <canvas class="col-8"></canvas>
+                            <!--<canvas class="col-8"></canvas>-->
+                            <div style='position: relative; height: 100%;'>
+                                <div id="viewerContainer">
+                                    <div id="viewer" class="pdfViewer"></div>
+                                </div>
+                            </div>
+
+                            <button id="pdf-sign" type="button" class="btn btn-primary text-white" style="display:none">Sign</button>
+                        </div>
+                    </li>
+                    <li class="list-group-item"><span class="action-list-badge">4</span>View Results
                     </li>
                 </ul>
             </div>
@@ -27,8 +36,8 @@
 <div id="app" class="content"></div>
 @stop
 @push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.8.349/pdf.min.js"></script>
-<script src="{{ asset('js/pdf_preview.js') }}"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/1.8.349/pdf.min.js"></script>-->
+<script src="{{ asset('js/PDFsign.js') }}"></script>
 <script src="{{ asset('js/miniapplet.js') }}"></script>
 <script src="{{ asset('js/autofirma.js') }}"></script>
 @endpush

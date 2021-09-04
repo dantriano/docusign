@@ -25,5 +25,8 @@
         "vue-loader": "^15.9.8",
         "vue-router": "^3.0.0",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "pdfjs-dist": "^2.9.359"
     }
 }

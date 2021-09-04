@@ -28,7 +28,7 @@ function isLoad() {
         return false;
     }
 }
-function firmarB64(fichero, dataB64) {
+function firmarB64(dataB64) {
     if (isLoad() == false) {
         autofirma = true;
     } else {

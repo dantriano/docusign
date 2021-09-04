@@ -13,8 +13,24 @@ class PdfController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(){
-        
+    public function index()
+    {
+    }
+    public function convertToJson($logFile)
+    {
+        $lines = file($logFile, FILE_IGNORE_NEW_LINES);
+
+        $data = array();
+        $pattern = '@INFO:root:(\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2}):\sTemp:\s(.+)\sHumidity:\s(.+)@';
+        foreach ($lines as $line) {
+            if (preg_match($pattern, $line, $matches)) {
+                $data[] = array(
+                    'date' => $matches[1],
+                    'temp' => $matches[2],
+                    'humidity' => $matches[3],
+                );
+            }
+        }
     }
     public function ej()
     {
@@ -60,8 +76,7 @@ class PdfController extends Controller
         $destiny = public_path('documents/junta.html');
 
         $converterFactory = new ConverterFactory($origin);
-        $options = (new PdfToHtmlOptions())->setOutputFilePath($destiny)
-;
+        $options = (new PdfToHtmlOptions())->setOutputFilePath($destiny);
         $converter = $converterFactory->createPdfToHtml($options);
 
         $html = $converter->createHtml();

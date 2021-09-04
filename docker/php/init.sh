@@ -30,6 +30,8 @@ apt-get update && apt-get install -y \
 #apt install -y -q ./pdftk-java_3.0.9-1_all.deb
 #pdftk --version
 
+#pdfsig
+
 #sudo apt install git default-jdk-headless ant \
 #    libcommons-lang3-java libbcprov-java
 #cd /usr/local/bin
