@@ -14,8 +14,30 @@
           <tr v-for="(req, key) in arrayRequests" :key="req.id">
             <th scope="row" v-text="key + 1"></th>
             <td v-text="req.name + ' ' + req.surname"></td>
-            <td v-text="req.status"></td>
-            <td><button
+            <td>
+              <div v-if="req.request_status === 0">
+                <i class="bi bi-stopwatch"></i>
+                <span class="badge bg-secondary">Pendent</span>
+              </div>
+              <div v-if="req.request_status === 1">
+                <i class="bi bi-pencil-square"></i>
+                <span class="badge bg-success">Firmat</span>
+              </div>
+              <div v-if="req.request_status === 2">
+                <i class="bi bi-stopwatch"></i
+                ><span class="badge bg-danger">Error</span>
+              </div>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm text-white"
+                @click="downloadPDF(req)"
+                :disabled="req.request_status === 1 ? false : true"
+              >
+                Descarregar
+              </button>
+              <button
                 type="button"
                 class="btn btn-danger btn-sm text-white"
                 @click="deleteOne(req)"
@@ -67,7 +89,6 @@ export default {
     };
   },
   mounted() {
-    console.log("Component mounted.");
     this.getAll();
     this.getUsers();
   },
@@ -79,7 +100,6 @@ export default {
         .get(url)
         .then(function (response) {
           console.log(response);
-          //creamos un array y guardamos el contenido que nos devuelve el response
           me.arrayRequests = response.data.res;
         })
         .catch(function (error) {
@@ -93,8 +113,6 @@ export default {
       axios
         .get(url)
         .then(function (response) {
-          console.log(response);
-          //creamos un array y guardamos el contenido que nos devuelve el response
           me.arrayUsers = response.data.res;
         })
         .catch(function (error) {
@@ -128,7 +146,7 @@ export default {
     deleteOne(data) {
       //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
       let me = this;
-      let id = data.id;
+      let id = data.request_id;
       if (confirm("¿Seguro que deseas borrar esta tarea?")) {
         axios
           .delete("/requests/" + id)
@@ -139,6 +157,27 @@ export default {
             console.log(error);
           });
       }
+    },
+    downloadPDF(data) {
+      axios
+        .get("/requests/" + data.request_id + "/pdf")
+        .then(function (response) {
+          var signedB64 = response.data;
+          var element = document.createElement("a");
+          element.setAttribute(
+            "href",
+            "data:application/octet-stream;base64," + signedB64
+          );
+          element.setAttribute("download", data.signedName);
+
+          element.style.display = "none";
+          document.body.appendChild(element);
+          element.click();
+          document.body.removeChild(element);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
 };

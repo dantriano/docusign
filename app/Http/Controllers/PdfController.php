@@ -6,6 +6,7 @@ use mikehaertl\pdftk\Pdf;
 use App\Http\Controllers\PdfForm;
 use Wbrframe\PdfToHtml\Converter\ConverterFactory;
 use Wbrframe\PdfToHtml\Converter\PopplerUtils\PdfToHtmlOptions;
+use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
@@ -13,6 +14,27 @@ class PdfController extends Controller
     {
         $this->middleware('auth');
     }
+    public function savePDFfromB64(Request $request)
+    {
+        $b64 = $request->b64;
+        $fileName = $request->fileName;
+        $fileExt = $request->fileExt;
+        $userID = $request->userID;
+        $reqID = $request->reqID;
+        $upload = setPDF64($b64, $fileName, 'signed/');
+        if ($upload)
+            return getPDF64($fileName, 'signed/');
+        return false;
+    }
+    public function getPDFfromB64(Request $request)
+    {
+        $fileName = $request->fileName;
+        $pdf = getPDF64($fileName, 'signed/');
+        if ($pdf)
+            return $pdf;
+        return false;
+    }
+    
     public function index()
     {
     }

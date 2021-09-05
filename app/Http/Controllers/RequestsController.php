@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Request as Peticiones;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 class RequestsController extends Controller
 {
@@ -32,6 +33,15 @@ class RequestsController extends Controller
         return view('documents.edit', compact('id'));
     }
 
+    public function getRequestPDFb64(Request $request)
+    {
+        $req = $this->show($request);
+        $signedName = $req->signedName;
+        $pdf = getPDF64($signedName, 'signed/');
+        if ($pdf)
+            return $pdf;
+        return false;
+    }
     public function viewSign(Request $request)
     {
         $req = $this->show($request);
@@ -44,7 +54,6 @@ class RequestsController extends Controller
         if ($request->expectsJson()) {
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
         $response = Peticiones::all();
         return response()->json(['res' => $response]);
     }
@@ -54,7 +63,7 @@ class RequestsController extends Controller
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        $response = Peticiones::leftJoin('users', 'users.id', '=', 'requests.user_id')->where('document_id', '=', $request->id)->get();
+        $response = Peticiones::leftJoin('users', 'users.id', '=', 'requests.user_id')->select('requests.id as request_id','requests.status as request_status','requests.signedName', 'users.*')->where('document_id', '=', $request->id)->get();
         return response()->json(['res' => $response]);
     }
 
@@ -63,7 +72,7 @@ class RequestsController extends Controller
         if ($request->expectsJson()) {
             // return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-        $response = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('requests.id as request_id', 'documents.*')->where('requests.user_id', '=', $request->id)->get();
+        $response = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('requests.id as request_id', 'documents.*')->where('requests.user_id', '=', $request->id)->where('requests.status', '=', $request->status)->get();
         return response()->json(['res' => $response]);
     }
     public function save(Request $request)
@@ -77,17 +86,17 @@ class RequestsController extends Controller
     public function update(Request $request)
     {
         $doc = Peticiones::findOrFail($request->id);
+        $data = $request->except('_token');
 
-        $doc->name = $request->name;
-        $doc->desc = $request->desc;
-
+        foreach ($data as $key => $value) {
+            $doc->$key = $value;
+        }
         $doc->save();
-
         return $doc;
     }
     public function show(Request $request)
     {
-        $doc = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('requests.id as request_id', 'documents.*')->findOrFail($request->id);
+        $doc = Peticiones::leftJoin('documents', 'documents.id', '=', 'requests.document_id')->select('documents.*', 'requests.id as request_id', 'requests.status as requestStatus', 'requests.signedName')->findOrFail($request->id);
         return $doc;
     }
     public function delete(Request $request)

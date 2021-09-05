@@ -20,6 +20,6 @@ class Request extends Authenticatable
         'status',
         'user_id',
         'document_id',
-        'signed_at'
+        'signedName'
     ];
 }

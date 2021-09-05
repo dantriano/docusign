@@ -17,6 +17,7 @@ class Requests extends Migration
             $table->id();
             $table->integer('status')->default(0);
             $table->timestamp('signed_at')->nullable();
+            $table->string('signedName')->nullable();
             $table->timestamps();
             $table->foreignId('user_id')->constrained('users')
                 ->onUpdate('cascade')

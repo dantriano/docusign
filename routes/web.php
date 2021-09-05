@@ -27,6 +27,7 @@ Route::get('/documentos/manager/{id}', ['as' => 'documentos.manager', 'uses' => 
 Route::get('/peticiones/firma/view/{id}', ['as' => 'requests.sign', 'uses' => 'App\Http\Controllers\RequestsController@viewSign']);
 
 Route::get('/pdf', ['as' => 'test', 'uses' => 'App\Http\Controllers\PdfController@index']);
+Route::post('/PDFfromB64', ['as' => 'postPDFfromB64', 'uses' => 'App\Http\Controllers\PdfController@savePDFfromB64']);
 
 
 /* API */
@@ -41,6 +42,10 @@ Route::get('/requests/document/{id}', ['as' => 'requests.byDocument', 'uses' => 
 Route::get('/requests/user/{id}', ['as' => 'requests.byDocument', 'uses' => 'App\Http\Controllers\RequestsController@byUser']);
 Route::post('/requests', ['as' => 'requests.save', 'uses' => 'App\Http\Controllers\RequestsController@save']);
 Route::delete('/requests/{id?}', ['as' => 'requests.delete', 'uses' => 'App\Http\Controllers\RequestsController@delete']);
+Route::put('/requests/{id?}', ['as' => 'requests.put', 'uses' => 'App\Http\Controllers\RequestsController@update']);
+Route::get('/requests/{id?}/pdf', ['as' => 'getRequestPDF', 'uses' => 'App\Http\Controllers\RequestsController@getRequestPDFb64']);
+
+
 Route::get('/users', ['as' => 'users.get', 'uses' => 'App\Http\Controllers\UsersController@list']);
 
 

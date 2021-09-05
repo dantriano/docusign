@@ -50,13 +50,13 @@ function firmarB64(dataB64) {
             params += "layer2FontSize=8\n";
             //params +="signatureRubricImage=\n";
 
-            MiniApplet.signAndSaveToFile(
-                "cosign",
+            MiniApplet.sign(
+                //"cosign",
                 dataB64,
                 "SHA256withRSA",
                 format,
                 params,
-                "baja.pdf",
+                //"baja.pdf",
                 successCallback,
                 errorCallback
             );
@@ -206,7 +206,7 @@ function mostrarPantalla() {
 
 function successCallback(signatureB64, certificateB64) {
     signature = signatureB64;
-
+    console.log(signatureB64);
     if (autofirma == false) {
         divMensaje.innerHTML =
             '<div class="iconOKFirma">Fichero firmado correctamente</div><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;' +
