@@ -14,4 +14,10 @@ return [
     'download_signed_file' => 'Descarregar document signat',
     'go_back' => 'Tornar',
     'already_signed' => 'Ja has signat aquest document',
+    'doc_name' =>'Nom del document',
+    'doc_type' => 'Tipus de document',
+    'doc_type_form' => 'Documento a cumplimentar y firmar por el destinatario',
+    'doc_type_multisign' => 'Documento solo para firmar por una o mas personas',
+    'doc_sel_file' => 'Seleccionar arxiu',
+    'doc_desc'=>'Descripció'
 ];

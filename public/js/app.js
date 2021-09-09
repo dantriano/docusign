@@ -5196,6 +5196,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5238,95 +5290,97 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["edit"],
+  props: {
+    id: {
+      Type: Number,
+      "default": null
+    },
+    lang: {}
+  },
   data: function data() {
     return {
+      isNew: this.id == null,
       name: "",
-      //Esta variable, mediante v-model esta relacionada con el input del formulario
       desc: "",
-      //Esta variable, mediante v-model esta relacionada con el input del formulario
-      id: this.edit ? this.edit : 0,
+      type: "",
+      file: "",
       URI: "/documentos",
-      arrayDocs: [],
-      //Este array contendrá las tareas de nuestra bd
-      params: this.$route.params //Este array contendrá las tareas de nuestra bd
-
+      arrayType: [],
+      params: this.$route.params
     };
   },
   methods: {
+    handleFileUpload: function handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      console.log(this.file);
+    },
+    success: function success(response) {
+      consol.log(2); //window.location.href = "/documentos";
+
+      if (response.status == "201") console.log("Correcto");
+      me.get();
+      me.clearFields();
+    },
+    errorCatch: function errorCatch(error) {
+      console.log(error);
+    },
     get: function get() {
       var me = this;
       var url = me.URI + "/get/" + me.id; //Ruta que hemos creado para que nos devuelva todas las tareas
 
       axios.get(url).then(function (response) {
         var res = response.data.res;
-        me.id = res.id;
         me.name = res.name;
         me.desc = res.desc;
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-      });
-    },
-    save: function save() {
-      var me = this;
-      var url = me.URI;
-      axios.post(url, {
-        name: this.name,
-        desc: this.desc
-      }).then(function (response) {
-        window.location.href = '/documentos';
-        if (response.status == "201") console.log("Correcto");
-        me.id = response.data.id;
-        me.get();
-        me.clearFields();
+        me.type = res.type;
       })["catch"](function (error) {
         console.log(error);
       });
     },
-    update: function update() {
-      var me = this;
-      var url = me.URI;
-      axios.put(url, {
-        id: this.id,
+    getFormData: function getFormData() {
+      var data = {
         name: this.name,
-        desc: this.desc
-      }).then(function (response) {
-        window.location.href = '/documentos';
-        me.get(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+        desc: this.desc,
+        type: this.type
+      };
+      var formData = new FormData();
+      Object.entries(data).forEach(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            value = _ref2[1];
 
-        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
-      })["catch"](function (error) {
-        console.log(error);
+        formData.append(key, value);
       });
+      this.file = this.$refs.file.files[0];
+      if (this.file) formData.append("file", this.file);
+      if (!this.isNew) formData.append("id", this.id);
+      return formData;
     },
-    loadFieldsUpdate: function loadFieldsUpdate(data) {
-      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
-      this.update = data.id;
+    save: function save(e) {
+      e.preventDefault();
       var me = this;
-      var url = "/tareas/buscar?id=" + this.update;
-      axios.get(url).then(function (response) {
-        me.name = response.data.name;
-        me.description = response.data.description;
-        me.content = response.data.content;
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-      });
+      var url = me.URI;
+      var header = {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      var formData = this.getFormData();
+      console.log(this.isNew);
+      if (this.isNew) axios.post(url, formData, header).then(this.success)["catch"](this.errorCatch);else {
+        axios.put(url, formData, header).then(this.success)["catch"](this.errorCatch);
+      }
     },
     back: function back() {
       this.$router.go(-1);
     }
   },
   mounted: function mounted() {
-    console.log(this.$router);
-    console.log(this.$router.getRoutes());
-
-    if (this.edit) {
-      this.id = this.edit;
+    //console.log(this.$router);
+    //console.log(this.$router.getRoutes());
+    if (!this.isNew) {
       this.get();
-    } //this.show();
-
+    }
   }
 });
 
@@ -66481,130 +66535,216 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container container-task" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("ID")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.id,
-                expression: "id"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.id },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.id = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v("Nombre")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.name = $event.target.value
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v("Descripción")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.desc,
-                expression: "desc"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.desc },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.desc = $event.target.value
-              }
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "container-buttons" }, [
-          _vm.edit == 0
-            ? _c(
-                "button",
+    _c(
+      "form",
+      {
+        attrs: { id: "editDocument", method: "post" },
+        on: { submit: _vm.save }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "mb-3 row" }, [
+              _c(
+                "label",
                 {
-                  staticClass: "btn btn-success btn-sm me-1 text-white",
+                  staticClass: "col-sm-2 col-form-label",
+                  attrs: { for: "name" }
+                },
+                [_vm._v(_vm._s(this.lang.doc_name))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-10" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.name,
+                      expression: "name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "name", required: "" },
+                  domProps: { value: _vm.name },
                   on: {
-                    click: function($event) {
-                      return _vm.save()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.name = $event.target.value
                     }
                   }
-                },
-                [_vm._v("\n          Añadir\n        ")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.edit != 0
-            ? _c(
-                "button",
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3 row" }, [
+              _c(
+                "label",
                 {
-                  staticClass: "btn btn-success btn-sm me-1 text-white",
+                  staticClass: "col-sm-2 col-form-label",
+                  attrs: { for: "type" }
+                },
+                [_vm._v("Tipo")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-10" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.type,
+                        expression: "type"
+                      }
+                    ],
+                    staticClass: "form-select",
+                    attrs: { id: "type" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.type = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { selected: "" } }),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(this.lang.doc_type_form) +
+                          "\n              "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(this.lang.doc_type_multisign) +
+                          "\n              "
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3 row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-2 col-form-label",
+                  attrs: { for: "document" }
+                },
+                [_vm._v("\n            " + _vm._s(this.lang.doc_sel_file))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-10" }, [
+                _c("input", {
+                  ref: "file",
+                  staticClass: "form-control",
+                  attrs: { type: "file", id: "document" },
                   on: {
-                    click: function($event) {
-                      return _vm.update()
+                    change: function($event) {
+                      return _vm.handleFileUpload()
                     }
                   }
-                },
-                [_vm._v("\n          Actualizar\n        ")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.edit != 0
-            ? _c(
-                "button",
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3 row" }, [
+              _c(
+                "label",
                 {
-                  staticClass: "btn",
+                  staticClass: "col-sm-2 col-form-label",
+                  attrs: { for: "desc" }
+                },
+                [_vm._v(_vm._s(this.lang.doc_desc))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-10" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.desc,
+                      expression: "desc"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "desc" },
+                  domProps: { value: _vm.desc },
                   on: {
-                    click: function($event) {
-                      return _vm.back()
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.desc = $event.target.value
                     }
                   }
-                },
-                [_vm._v("\n          Atrás\n        ")]
-              )
-            : _vm._e()
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "mb-3 d-grid gap-2 d-md-flex justify-content-md-end"
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "d-flex justify-content-end d-md-block" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm text-white",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm.isNew
+                          ? _c("span", [_vm._v("Añadir")])
+                          : _c("span", [_vm._v("Actualizar")])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary btn-sm text-white",
+                        on: {
+                          click: function($event) {
+                            return _vm.back()
+                          }
+                        }
+                      },
+                      [_vm._v("\n              Atrás\n            ")]
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = []
