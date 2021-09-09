@@ -20,8 +20,8 @@ if (!function_exists('setPDF64')) {
     }
 }
 if (!function_exists('docs_path')) {
-    function docs_path($name, $sub = '')
+    function docs_path($name='', $sub = 'app/')
     {
-        return public_path('documents/' . $sub . $name);
+        return storage_path( $sub . $name);
     }
 }

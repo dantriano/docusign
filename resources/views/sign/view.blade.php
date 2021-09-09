@@ -26,7 +26,7 @@
                 @endif
                 @if($req->requestStatus==0)
                 <ul class="list-group">
-                    <li class="list-group-item"><span class="action-list-badge">1</span>{{ __('messages.download_fill') }}<a class="icons-size-big" href="data:application/octet-stream;base64,{{getPDF64($req->file)}}" download="{{$req->file}}"><i class="bi bi-file-earmark-arrow-down"></i></a></li>
+                    <li class="list-group-item"><span class="action-list-badge">1</span>{{ __('messages.download_fill') }}<a class="icons-size-big" href="data:application/octet-stream;base64,{{getPDF64($req->file_path)}}" download="{{$req->file_name}}"><i class="bi bi-file-earmark-arrow-down"></i></a></li>
                     <li class="list-group-item"><span class="action-list-badge">2</span>{{ __('messages.upload_document') }}
                         <input id="pdf-upload" type="file" />
                     </li>

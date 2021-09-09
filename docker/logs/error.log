@@ -43,3 +43,54 @@
 2021/09/08 11:31:18 [notice] 1#1: start worker process 23
 2021/09/08 11:31:18 [notice] 1#1: start worker process 24
 2021/09/08 11:31:18 [notice] 1#1: start worker process 25
+2021/09/09 22:10:10 [error] 22#22: *522 client intended to send too large body: 5267097 bytes, client: 172.26.0.1, server: , request: "POST /documentos HTTP/1.1", host: "localhost:9090", referrer: "http://localhost:9090/documentos/edit/1"
+2021/09/09 22:10:31 [error] 22#22: *524 client intended to send too large body: 1372272 bytes, client: 172.26.0.1, server: , request: "POST /documentos HTTP/1.1", host: "localhost:9090", referrer: "http://localhost:9090/documentos/edit/1"
+2021/09/09 22:13:38 [error] 22#22: *525 connect() failed (111: Connection refused) while connecting to upstream, client: 172.26.0.1, server: , request: "GET /documentos/edit/1 HTTP/1.1", upstream: "fastcgi://172.26.0.2:9000", host: "localhost:9090"
+2021/09/09 22:13:42 [error] 22#22: *525 connect() failed (111: Connection refused) while connecting to upstream, client: 172.26.0.1, server: , request: "GET /documentos/edit/1 HTTP/1.1", upstream: "fastcgi://172.26.0.2:9000", host: "localhost:9090"
+2021/09/09 22:17:42 [error] 22#22: *532 client intended to send too large body: 1372272 bytes, client: 172.26.0.1, server: , request: "POST /documentos HTTP/1.1", host: "localhost:9090", referrer: "http://localhost:9090/documentos/edit/1"
+2021/09/09 22:21:39 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:21:44 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:21:50 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:21:55 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:22:00 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:22:05 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:22:12 [emerg] 1#1: no "events" section in configuration
+2021/09/09 22:25:47 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:25:52 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:25:56 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:02 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:07 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:13 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:20 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:30 [crit] 1#1: pread() "/etc/nginx/nginx.conf" failed (21: Is a directory)
+2021/09/09 22:26:46 [emerg] 1#1: open() "/etc/nginx/nginx.conf" failed (2: No such file or directory)
+2021/09/09 22:27:05 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:10 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:15 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:20 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:25 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:30 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:37 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:27:47 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:28:03 [emerg] 1#1: "client_max_body_size" directive is not allowed here in /etc/nginx/nginx.conf:3
+2021/09/09 22:28:43 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:28:48 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:28:53 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:28:58 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:03 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:09 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:15 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:25 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:36 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:29:41 [emerg] 1#1: "user" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:1
+2021/09/09 22:30:01 [error] 21#21: *1 client intended to send too large body: 1372272 bytes, client: 172.26.0.1, server: , request: "POST /documentos HTTP/1.1", host: "localhost:9090", referrer: "http://localhost:9090/documentos/edit/1"
+2021/09/09 22:31:40 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:31:48 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:31:55 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:01 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:07 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:12 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:19 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:29 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:32:45 [emerg] 1#1: host not found in upstream "php-fpm" in /etc/nginx/conf.d/app.conf:10
+2021/09/09 22:33:27 [error] 24#24: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 172.26.0.1, server: , request: "GET /documentos/edit/1 HTTP/1.1", upstream: "fastcgi://172.26.0.2:9000", host: "localhost:9090"

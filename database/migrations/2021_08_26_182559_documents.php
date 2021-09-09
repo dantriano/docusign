@@ -20,7 +20,8 @@ class Documents extends Migration
             $table->string('name');
             $table->integer('user_id')->default('0');
             $table->string('desc')->default('');
-            $table->string('file')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('file_path')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

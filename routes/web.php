@@ -33,7 +33,7 @@ Route::post('/PDFfromB64', ['as' => 'postPDFfromB64', 'uses' => 'App\Http\Contro
 /* API */
 Route::get('/documentos/get/{id?}', ['as' => 'documentos.get', 'uses' => 'App\Http\Controllers\DocumentsController@get']);
 Route::post('/documentos', ['as' => 'documentos.save', 'uses' => 'App\Http\Controllers\DocumentsController@save']);
-Route::put('/documentos', ['as' => 'documentos.update', 'uses' => 'App\Http\Controllers\DocumentsController@update']);
+Route::put('/documentos', ['as' => 'documentos.update', 'uses' => 'App\Http\Controllers\DocumentsController@save']);
 Route::delete('/documentos/{id?}', ['as' => 'documentos.delete', 'uses' => 'App\Http\Controllers\DocumentsController@delete']);
 Route::get('/documentos/list/{user_id?}', ['as' => 'documentos.list', 'uses' => 'App\Http\Controllers\DocumentsController@list']);
 //Route::get('/documentos/new', [App\Http\Controllers\DocumentsController::class, 'view']);

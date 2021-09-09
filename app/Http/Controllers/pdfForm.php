@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-class PdfForm
+class PdfForm extends Controller
 {
     /*
     * Path to raw PDF form

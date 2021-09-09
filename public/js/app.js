@@ -5295,6 +5295,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       Type: Number,
       "default": null
     },
+    user_id: {
+      Type: Number
+    },
     lang: {}
   },
   data: function data() {
@@ -5315,11 +5318,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       console.log(this.file);
     },
     success: function success(response) {
-      consol.log(2); //window.location.href = "/documentos";
-
-      if (response.status == "201") console.log("Correcto");
-      me.get();
-      me.clearFields();
+      window.location.href = "/documentos";
     },
     errorCatch: function errorCatch(error) {
       console.log(error);
@@ -5339,6 +5338,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     getFormData: function getFormData() {
       var data = {
+        _method: this.isNew ? "POST" : "PUT",
+        user_id: this.user_id,
         name: this.name,
         desc: this.desc,
         type: this.type
@@ -5366,10 +5367,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
         }
       };
       var formData = this.getFormData();
-      console.log(this.isNew);
-      if (this.isNew) axios.post(url, formData, header).then(this.success)["catch"](this.errorCatch);else {
-        axios.put(url, formData, header).then(this.success)["catch"](this.errorCatch);
-      }
+      axios.post(url, formData).then(this.success)["catch"](this.errorCatch);
     },
     back: function back() {
       this.$router.go(-1);

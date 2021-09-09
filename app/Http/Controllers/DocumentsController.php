@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\FileUploadController;
 
 class DocumentsController extends Controller
 {
@@ -66,21 +67,31 @@ class DocumentsController extends Controller
 
     public function save(Request $request)
     {
-        $doc = new Document();
-        $doc->name = $request->name;
-        $doc->desc = $request->desc;
+        $excludedKeys = ['file', '_method'];
+        $doc = ($request->id) ? Document::findOrFail($request->id) : new Document();
+
+        foreach ($request->all() as $key => $value) {
+            if (!in_array($key, $excludedKeys)) $doc->$key = $value;
+        }
+        if ($request->file) {
+            $fileUpload = new FileUploadController();
+            $file = json_decode($fileUpload->fileUpload($request));
+            if ($file->success) {
+                $doc->file_name = $file->file_name;
+                $doc->file_path = $file->file_path;
+            }
+        }
         $doc->save();
         return response()->json(['res' => $doc]);
     }
+    /*Legacy */
     public function update(Request $request)
     {
-        $doc = Document::findOrFail($request->id);
 
+        $doc = Document::findOrFail($request->id);
         $doc->name = $request->name;
         $doc->desc = $request->desc;
-
         $doc->save();
-
         return $doc;
     }
     public function show(Request $request)

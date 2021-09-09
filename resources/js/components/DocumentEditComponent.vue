@@ -86,6 +86,9 @@ export default {
       Type: Number,
       default: null,
     },
+    user_id: {
+      Type: Number,
+    },
     lang: {},
   },
   data() {
@@ -106,11 +109,7 @@ export default {
       console.log(this.file);
     },
     success: function (response) {
-      consol.log(2);
-      //window.location.href = "/documentos";
-      if (response.status == "201") console.log("Correcto");
-      me.get();
-      me.clearFields();
+      window.location.href = "/documentos";
     },
     errorCatch: function (error) {
       console.log(error);
@@ -132,6 +131,8 @@ export default {
     },
     getFormData() {
       let data = {
+        _method: this.isNew ? "POST" : "PUT",
+        user_id: this.user_id,
         name: this.name,
         desc: this.desc,
         type: this.type,
@@ -155,18 +156,7 @@ export default {
         },
       };
       let formData = this.getFormData();
-      console.log(this.isNew);
-      if (this.isNew)
-        axios
-          .post(url, formData, header)
-          .then(this.success)
-          .catch(this.errorCatch);
-      else {
-        axios
-          .put(url, formData, header)
-          .then(this.success)
-          .catch(this.errorCatch);
-      }
+      axios.post(url, formData).then(this.success).catch(this.errorCatch);
     },
     back() {
       this.$router.go(-1);
@@ -175,6 +165,7 @@ export default {
   mounted() {
     //console.log(this.$router);
     //console.log(this.$router.getRoutes());
+
     if (!this.isNew) {
       this.get();
     }
