@@ -61,5 +61,7 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 #chmod o+r /etc/resolv.conf
 #echo "nameserver 8.8.8.8" >> /etc/resolv.conf 
 #npm run dev
+usermod -u 1000 www-data
+
 composer install
 php-fpm
