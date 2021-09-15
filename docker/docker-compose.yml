@@ -19,7 +19,8 @@ services:
       - ${PHP_PORT}
 
   ##Nginx Service
-  webserver:
+  docusign-nginx:
+    hostname: docusign-nginx
     image: nginx:alpine
     container_name: webserver_${DOCKER_NAME}
     restart: unless-stopped
