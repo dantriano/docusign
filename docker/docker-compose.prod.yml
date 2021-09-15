@@ -22,7 +22,7 @@ services:
   docusign-nginx:
     hostname: docusign-nginx
     image: nginx:alpine
-    container_name: webserver_${DOCKER_NAME}
+    container_name: nginx_${DOCKER_NAME}
     restart: unless-stopped
     tty: true
     ports:
