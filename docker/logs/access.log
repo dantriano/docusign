@@ -1130,3 +1130,5 @@
 172.26.0.1 - - [15/Sep/2021:10:15:16 +0000] "GET /css/app.css HTTP/1.1" 200 289596 "http://localhost:2080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
 172.26.0.1 - - [15/Sep/2021:10:15:16 +0000] "GET /img/logo-clave.png HTTP/1.1" 200 4987 "http://localhost:2080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
 172.26.0.1 - - [15/Sep/2021:10:15:16 +0000] "GET /js/app.js HTTP/1.1" 200 2406415 "http://localhost:2080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+172.26.0.1 - - [15/Sep/2021:10:47:10 +0000] "GET / HTTP/1.1" 200 1237 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+172.26.0.1 - - [15/Sep/2021:10:47:10 +0000] "GET /favicon.ico HTTP/1.1" 200 0 "http://localhost:2080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
