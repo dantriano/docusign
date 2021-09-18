@@ -19,7 +19,7 @@ class Documents extends Migration
             $table->integer('category')->default('0');
             $table->string('name');
             $table->integer('user_id')->default('0');
-            $table->string('desc')->default('');
+            $table->string('desc')->default('')->nullable();
             $table->string('file_name')->nullable();
             $table->string('file_path')->nullable();
             $table->integer('status')->default(0);
